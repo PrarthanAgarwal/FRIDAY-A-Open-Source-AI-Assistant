@@ -19,15 +19,23 @@ Introducing FRIDAY, your cutting-edge speech-to-speech AI assistant that brings 
 
 
 ## Architecture 
-**User Console:** The system begins by recording the user's speech through the user interface or console.
+- **User Console:** The system begins by recording the user's speech through the user interface or console.
 
-**Whisper STT:** This component transcribes the recorded speech into text using high-accuracy speech-to-text technology.
+- **Whisper STT:** This component transcribes the recorded speech into text using high-accuracy speech-to-text technology.
 
-**Conversational Chain:** The transcribed text is processed by a conversational chain powered by LM Studio and any large language model (LLM) to generate a meaningful response.
+- **Conversational Chain:** The transcribed text is processed by a conversational chain powered by LM Studio and any large language model (LLM) to generate a meaningful response.
 
-**MyShell OpenVoice:** The generated response is converted into speech using open-source voice cloning technology, providing flexibility in voice style (emotion, accents, tone).
+- **MyShell OpenVoice:** The generated response is converted into speech using open-source voice cloning technology, providing flexibility in voice style (emotion, accents, tone).
 
-**User Console (Playback):** Finally, the system plays the generated audio response back to the user, completing the interaction.
+![FRIDAY](https://github.com/user-attachments/assets/f1075f62-b9d0-45ee-919c-3327eebf3e10)
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
+
+## Prerequisites
+ - Make sure to set up a *virtual Python environment*. You have several options for this, including pyenv, virtualenv and others that serve a similar purpose.
+
+ - Set up [OpenVoice](https://github.com/myshell-ai/OpenVoice) from their masterful repo.
+
+ - Install *requirements.txt* on your environemnt.
+
+ - Test different LLMs with varying parameter sizes to determine which provides the best token-per-second output on your device. Currently, I'm using TheBloke/phi-2 - 3B model for comparison. 
