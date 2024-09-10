@@ -94,7 +94,7 @@ def chatgpt_streamed(user_input, system_message, conversation_history, bot_name)
     Logs the conversation to a file.
     """
     messages = [{"role": "system", "content": system_message}] + conversation_history + [{"role": "user", "content": user_input}]
-    temperature=1
+    temperature=0.7
     
     streamed_completion = client.chat.completions.create(
         model="TheBloke/phi-2-GGUF",
