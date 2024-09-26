@@ -1,0 +1,7 @@
+#Ignoring
+
+__pycache__/
+
+checkpoints/
+
+processed/
