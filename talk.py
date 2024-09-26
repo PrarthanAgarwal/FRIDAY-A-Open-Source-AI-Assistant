@@ -2,6 +2,7 @@ import os
 import torch
 import argparse
 import pyaudio
+import logging
 import wave
 from zipfile import ZipFile
 import langid
@@ -17,6 +18,11 @@ import datetime
 
 from record import speech_to_text
 
+# Setup logging
+LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
+logging.basicConfig(filename="friday.log", level=logging.DEBUG, format=LOG_FORMAT)
+logger = logging.getLogger()
+
 # ANSI escape codes for colors
 PINK = '\033[95m'
 CYAN = '\033[96m'
@@ -27,6 +33,7 @@ RESET_COLOR = '\033[0m'
 # Function to open a file and return its contents as a string
 def open_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as infile:
+        logger.info(f"Opened file {filepath} successfully")
         return infile.read()
 
 # Initialize the OpenAI client with the API key
@@ -44,8 +51,14 @@ args = parser.parse_args()
 en_ckpt_base = 'checkpoints/base_speakers/EN'
 ckpt_converter = 'checkpoints/converter'
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+logger.info(f"Device set to {device}")
+
 output_dir = 'outputs'
-os.makedirs(output_dir, exist_ok=True)
+try:
+    os.makedirs(output_dir, exist_ok=True)
+    logger.info(f"Output directory '{output_dir}' created successfully")
+except Exception as e:
+    logger.error(f"Failed to create output directory '{output_dir}': {e}")
 
 # Load models
 en_base_speaker_tts = BaseSpeakerTTS(f'{en_ckpt_base}/config.json', device=device)
