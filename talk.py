@@ -8,20 +8,15 @@ from zipfile import ZipFile
 import langid
 from openvoice import se_extractor
 from api import BaseSpeakerTTS, ToneColorConverter 
-import openai
-from openai import OpenAI
 import time
 import speech_recognition as sr
 import whisper
 import numpy as np
 import datetime
+import requests
+import json
 
 from record import speech_to_text
-
-# Setup logging
-LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging.basicConfig(filename="friday.log", level=logging.DEBUG, format=LOG_FORMAT)
-logger = logging.getLogger()
 
 # ANSI escape codes for colors
 PINK = '\033[95m'
@@ -33,14 +28,38 @@ RESET_COLOR = '\033[0m'
 # Function to open a file and return its contents as a string
 def open_file(filepath):
     with open(filepath, 'r', encoding='utf-8') as infile:
-        logger.info(f"Opened file {filepath} successfully")
         return infile.read()
-
-# Initialize the OpenAI client with the API key
-client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
 
 # Define the name of the log file
 chat_log_filename = "chatbot_conversation_log.txt"
+
+# Ollama query function
+def query_ollama(prompt):
+    url = "http://localhost:11434/api/generate"
+    headers = {
+        "Content-Type": "application/json"
+    }
+    data = {
+        "model": "llama3.2",  # You can change this to your preferred model
+        "prompt": prompt,
+        "stream": False
+    }
+
+    try:
+        response = requests.post(url, headers=headers, data=json.dumps(data))
+        if response.status_code == 200:
+            try:
+                data = response.json()
+                return data["response"]
+            except json.JSONDecodeError as e:
+                print(f"Error parsing JSON: {e}")
+                return None
+        else:
+            print(f"Error querying Ollama: {response.status_code}, {response.text}")
+            return None
+    except Exception as e:
+        print(f"Error querying Ollama: {e}")
+        return None
 
 # Command line arguments
 parser = argparse.ArgumentParser()
@@ -51,18 +70,15 @@ args = parser.parse_args()
 en_ckpt_base = 'checkpoints/base_speakers/EN'
 ckpt_converter = 'checkpoints/converter'
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-logger.info(f"Device set to {device}")
 
 output_dir = 'outputs'
 try:
     os.makedirs(output_dir, exist_ok=True)
-    logger.info(f"Output directory '{output_dir}' created successfully")
 except Exception as e:
-    logger.error(f"Failed to create output directory '{output_dir}': {e}")
 
 # Load models
-en_base_speaker_tts = BaseSpeakerTTS(f'{en_ckpt_base}/config.json', device=device)
-en_base_speaker_tts.load_ckpt(f'{en_ckpt_base}/checkpoint.pth')
+    en_base_speaker_tts = BaseSpeakerTTS(f'{en_ckpt_base}/config.json', device=device)
+    en_base_speaker_tts.load_ckpt(f'{en_ckpt_base}/checkpoint.pth')
 
 tone_color_converter = ToneColorConverter(f'{ckpt_converter}/config.json', device=device)
 tone_color_converter.load_ckpt(f'{ckpt_converter}/checkpoint.pth')
@@ -71,6 +87,43 @@ tone_color_converter.load_ckpt(f'{ckpt_converter}/checkpoint.pth')
 en_source_default_se = torch.load(f'{en_ckpt_base}/en_default_se.pth').to(device)
 en_source_style_se = torch.load(f'{en_ckpt_base}/en_style_se.pth').to(device)
 
+def get_timestamp():
+    return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+def chatgpt_streamed(user_input, system_message, conversation_history, bot_name):
+    """
+    Function to send a query to Ollama, process the response, and print each line in green color.
+    Logs the conversation to a file.
+    """
+    # Combine system message, conversation history, and user input
+    full_prompt = f"{system_message}\n\nConversation history:\n"
+    for message in conversation_history:
+        role = message["role"]
+        content = message["content"]
+        full_prompt += f"{role}: {content}\n"
+    full_prompt += f"user: {user_input}\nassistant:"
+
+    # Get response from Ollama
+    response = query_ollama(full_prompt)
+    
+    if response is None:
+        print("Failed to get response from Ollama")
+        return ""
+
+    # Process and print the response
+    full_response = ""
+
+    with open(chat_log_filename, "a") as log_file:
+        lines = response.split('\n')
+        for line in lines:
+            if line.strip():
+                print(NEON_GREEN + line + RESET_COLOR)
+                full_response += line + '\n'
+                log_line = f"{get_timestamp()} {bot_name}: {line}\n"
+                log_file.write(log_line)
+
+    return full_response.strip()
+
 # Main processing function
 def process_and_play(prompt, style, audio_file_pth2):
     tts_model = en_base_speaker_tts
@@ -78,7 +131,6 @@ def process_and_play(prompt, style, audio_file_pth2):
 
     speaker_wav = audio_file_pth2
 
-    # Process text and generate audio
     try:
         target_se, audio_name = se_extractor.get_se(speaker_wav, tone_color_converter, target_dir='processed', vad=True)
 
@@ -87,7 +139,6 @@ def process_and_play(prompt, style, audio_file_pth2):
 
         save_path = f'{output_dir}/output.wav'
         
-        # Run the tone color converter
         encode_message = "@MyShell"
         tone_color_converter.convert(audio_src_path=src_path, src_se=source_se, tgt_se=target_se, output_path=save_path, message=encode_message)
 
@@ -97,72 +148,18 @@ def process_and_play(prompt, style, audio_file_pth2):
     except Exception as e:
         print(f"Error during audio generation: {e}")
 
-# Define a function to get the current timestamp in a formatted string
-def get_timestamp():
-    return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-def chatgpt_streamed(user_input, system_message, conversation_history, bot_name):
-    """
-    Function to send a query to GPT-3.5-model, stream the response, and print each full line in yellow color.
-    Logs the conversation to a file.
-    """
-    messages = [{"role": "system", "content": system_message}] + conversation_history + [{"role": "user", "content": user_input}]
-    temperature=0.7
-    
-    streamed_completion = client.chat.completions.create(
-        model="TheBloke/phi-2-GGUF",
-        messages=messages,
-        stream=True
-    )
-
-    full_response = ""
-    line_buffer = ""
-
-    with open(chat_log_filename, "a") as log_file:  # Open the log file in append mode
-        for chunk in streamed_completion:
-            delta_content = chunk.choices[0].delta.content
-
-            if delta_content is not None:
-                line_buffer += delta_content
-
-                if '\n' in line_buffer:
-                    lines = line_buffer.split('\n')
-                    for line in lines[:-1]:
-                        print(NEON_GREEN + line + RESET_COLOR)
-                        full_response += line + '\n'
-                        log_line = f"{get_timestamp()} {bot_name}: {line}\n"  # Include timestamp in the log entry
-                        #log_file.write(log_line)  # Log the line with the bot's name
-                    line_buffer = lines[-1]
-
-        if line_buffer:
-            print(NEON_GREEN + line_buffer + RESET_COLOR)
-            full_response += line_buffer
-            log_line = f"{get_timestamp()} {bot_name}: {line_buffer}\n"  # Include timestamp in the log entry
-            log_file.write(log_line)  # Log the remaining line
-
-    return full_response
-
 #Function to play audio using PyAudio
 def play_audio(file_path):
-    # Open the audio file
     wf = wave.open(file_path, 'rb')
-
-    # Create a PyAudio instance
     p = pyaudio.PyAudio()
-
-    # Open a stream to play audio
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                     channels=wf.getnchannels(),
                     rate=wf.getframerate(),
                     output=True)
-
-    # Read and play audio data
     data = wf.readframes(1024)
     while data:
         stream.write(data)
         data = wf.readframes(1024)
-
-    # Stop and close the stream and PyAudio instance
     stream.stop_stream()
     stream.close()
     p.terminate()
@@ -183,7 +180,7 @@ def user_chatbot_conversation():
         
         print(PINK + "Friday:" + RESET_COLOR)
         # Process user input and get chatbot response
-        chatbot_response = chatgpt_streamed(user_input, system_message, conversation_history, "Chatbot")
+        chatbot_response = chatgpt_streamed(user_input, system_message, conversation_history, "Friday")
         conversation_history.append({"role": "assistant", "content": chatbot_response})
         
         # Process the chatbot's response and play the audio output
@@ -196,4 +193,5 @@ def user_chatbot_conversation():
             conversation_history = conversation_history[-20:]
 
 # Start the conversation
-user_chatbot_conversation()
+if __name__ == "__main__":
+    user_chatbot_conversation()
