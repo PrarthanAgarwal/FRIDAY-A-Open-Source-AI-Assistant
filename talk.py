@@ -17,6 +17,7 @@ import requests
 import json
 
 from record import speech_to_text
+from memory import ConversationMemory
 
 # ANSI escape codes for colors
 PINK = '\033[95m'
@@ -36,27 +37,33 @@ chat_log_filename = "chatbot_conversation_log.txt"
 # Ollama query function
 def query_ollama(prompt):
     url = "http://localhost:11434/api/generate"
-    headers = {
-        "Content-Type": "application/json"
-    }
+    headers = {"Content-Type": "application/json"}
     data = {
-        "model": "llama3.2",  # You can change this to your preferred model
+        "model": "llama3.2",
         "prompt": prompt,
-        "stream": False
+        "stream": True,
+        "options": {
+            "num_ctx": 1024,
+            "temperature": 0.7,
+            "top_p": 0.9
+        }
     }
 
     try:
-        response = requests.post(url, headers=headers, data=json.dumps(data))
-        if response.status_code == 200:
-            try:
-                data = response.json()
-                return data["response"]
-            except json.JSONDecodeError as e:
-                print(f"Error parsing JSON: {e}")
-                return None
-        else:
-            print(f"Error querying Ollama: {response.status_code}, {response.text}")
-            return None
+        response = requests.post(url, headers=headers, json=data, stream=True)
+        response.raise_for_status()
+        
+        full_response = ""
+        for line in response.iter_lines():
+            if line:
+                json_response = json.loads(line)
+                if 'response' in json_response:
+                    chunk = json_response['response']
+                    print(NEON_GREEN + chunk + RESET_COLOR, end='', flush=True)
+                    full_response += chunk
+                    
+        return full_response
+
     except Exception as e:
         print(f"Error querying Ollama: {e}")
         return None
@@ -69,34 +76,52 @@ args = parser.parse_args()
 # Model and device setup
 en_ckpt_base = 'checkpoints/base_speakers/EN'
 ckpt_converter = 'checkpoints/converter'
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
+device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
+# Create output directory
 output_dir = 'outputs'
 try:
     os.makedirs(output_dir, exist_ok=True)
 except Exception as e:
+    print(f"Error creating output directory: {e}")
+    pass
 
-# Load models
+# Initialize the models outside of the try-except block
+try:
+    # Initialize English base speaker TTS
     en_base_speaker_tts = BaseSpeakerTTS(f'{en_ckpt_base}/config.json', device=device)
     en_base_speaker_tts.load_ckpt(f'{en_ckpt_base}/checkpoint.pth')
 
-tone_color_converter = ToneColorConverter(f'{ckpt_converter}/config.json', device=device)
-tone_color_converter.load_ckpt(f'{ckpt_converter}/checkpoint.pth')
+    # Initialize tone color converter
+    tone_color_converter = ToneColorConverter(f'{ckpt_converter}/config.json', device=device)
+    tone_color_converter.load_ckpt(f'{ckpt_converter}/checkpoint.pth')
 
-# Load speaker embeddings for English
-en_source_default_se = torch.load(f'{en_ckpt_base}/en_default_se.pth').to(device)
-en_source_style_se = torch.load(f'{en_ckpt_base}/en_style_se.pth').to(device)
+    # Load speaker embeddings for English
+    en_source_default_se = torch.load(f'{en_ckpt_base}/en_default_se.pth').to(device)
+    en_source_style_se = torch.load(f'{en_ckpt_base}/en_style_se.pth').to(device)
+except Exception as e:
+    print(f"Error initializing models: {e}")
+    raise  # Re-raise the exception as the program cannot continue without models
 
 def get_timestamp():
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+memory = ConversationMemory()
 
 def chatgpt_streamed(user_input, system_message, conversation_history, bot_name):
     """
     Function to send a query to Ollama, process the response, and print each line in green color.
     Logs the conversation to a file.
     """
-    # Combine system message, conversation history, and user input
-    full_prompt = f"{system_message}\n\nConversation history:\n"
+    # Get recent conversations to add as context
+    recent_memory = memory.get_recent_conversations()
+    
+    # Add memory context to the prompt
+    full_prompt = f"{system_message}\n\nPrevious conversations:\n"
+    for conv in recent_memory:
+        full_prompt += f"User: {conv['user']}\nFriday: {conv['assistant']}\n"
+    
+    full_prompt += f"\nCurrent conversation history:\n"
     for message in conversation_history:
         role = message["role"]
         content = message["content"]
@@ -106,23 +131,11 @@ def chatgpt_streamed(user_input, system_message, conversation_history, bot_name)
     # Get response from Ollama
     response = query_ollama(full_prompt)
     
-    if response is None:
-        print("Failed to get response from Ollama")
-        return ""
-
-    # Process and print the response
-    full_response = ""
-
-    with open(chat_log_filename, "a") as log_file:
-        lines = response.split('\n')
-        for line in lines:
-            if line.strip():
-                print(NEON_GREEN + line + RESET_COLOR)
-                full_response += line + '\n'
-                log_line = f"{get_timestamp()} {bot_name}: {line}\n"
-                log_file.write(log_line)
-
-    return full_response.strip()
+    if response is not None:
+        # Save the conversation to memory
+        memory.save_conversation(user_input, response)
+        
+    return response
 
 # Main processing function
 def process_and_play(prompt, style, audio_file_pth2):
