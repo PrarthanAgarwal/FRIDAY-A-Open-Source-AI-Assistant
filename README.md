@@ -11,7 +11,7 @@ Introducing FRIDAY, your cutting-edge speech-to-speech AI assistant that brings 
 
 **Whisper:** For high-accuracy speech-to-text transcription.
 
-**LM Studio:** A software platform for using and fine-tuning language models locally on your machine.
+**Ollama:** A platform for hosting and running large language models (LLMs) such as llama3.2 locally on your machine.
 
 **sounddevice, pyaudio, and speechrecognition:** Essential for audio recording and playback.
 
@@ -23,11 +23,11 @@ Introducing FRIDAY, your cutting-edge speech-to-speech AI assistant that brings 
 
 - **Whisper STT:** This component transcribes the recorded speech into text using high-accuracy speech-to-text technology.
 
-- **Conversational Chain:** The transcribed text is processed by a conversational chain powered by LM Studio and any large language model (LLM) to generate a meaningful response.
+- **Conversational Chain:** The transcribed text is processed by a conversational chain powered by Ollama, which uses llama3.2 or any other large language model (LLM), to generate a meaningful response.
 
 - **MyShell OpenVoice:** The generated response is converted into speech using open-source voice cloning technology, providing flexibility in voice style (emotion, accents, tone).
 
-![FRIDAY](https://github.com/user-attachments/assets/f1075f62-b9d0-45ee-919c-3327eebf3e10)
+![FRIDAY](https://github.com/user-attachments/assets/5fe601f7-3335-449b-9b59-ea961449fbe7)
 
 
 
@@ -38,4 +38,4 @@ Introducing FRIDAY, your cutting-edge speech-to-speech AI assistant that brings 
 
  - Install *requirements.txt* on your environemnt.
 
- - Test different LLMs with varying parameter sizes to determine which provides the best token-per-second output on your device. Currently, I'm using TheBloke/phi-2 - 3B model for comparison. 
+ - Test different LLMs with varying parameter sizes to determine which provides the best token-per-second output on your device. Currently, I'm using **Ollama's llama3.2** model for comparison. 

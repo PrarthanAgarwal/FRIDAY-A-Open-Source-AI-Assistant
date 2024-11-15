@@ -11,3 +11,7 @@ FRIDAY.png
 chatbot_conversation_log.txt
 
 tempaudio/
+
+conversation_memory.json
+
+outputs/
