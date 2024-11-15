@@ -1,17 +1,25 @@
-#Ignoring
-
+# Directories
 __pycache__/
-
 checkpoints/
-
 processed/
-
-FRIDAY.png
-
-chatbot_conversation_log.txt
-
 tempaudio/
+outputs/
 
+# Files
+FRIDAY.png
+chatbot_conversation_log.txt
 conversation_memory.json
 
-outputs/
+# Audio files
+*.wav
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# IDE
+.vscode/
+.idea/

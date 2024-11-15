@@ -1,41 +1,87 @@
+# F.R.I.D.A.Y - Friendly, Reliable, Intelligent Digital Assistant for You
 
-# FRIDAY - A Open Source AI Assistant
+FRIDAY is an advanced speech-to-speech AI assistant that offers natural voice interactions. Powered by OpenVoice for voice cloning, Whisper for speech recognition, and Ollama's language models for intelligent responses, FRIDAY provides a seamless conversational experience.
 
-Introducing FRIDAY, your cutting-edge speech-to-speech AI assistant that brings seamless voice interactions to life. Powered by OpenVoice for advanced voice cloning, FRIDAY captures and replicates voice styles with emotional depth, accents, and tone for a more personalized user experience. With Whisper's high-accuracy speech-to-text capabilities, FRIDAY flawlessly transcribes spoken words into text, ensuring precise understanding of user input. Paired with state-of-the-art large language models, FRIDAY processes this input to generate intelligent, contextually relevant responses.
+## Features
 
-
+- **Natural Voice Interaction**: Speak naturally and get voice responses
+- **Intelligent Conversations**: Context-aware responses with personality
+- **Voice Interruption**: Interrupt FRIDAY's response by speaking
+- **Memory System**: Remembers important conversations and context
+- **Time Queries**: Get current time information
+- **ESC to Stop**: Easy control with escape key to stop interactions
 
 ## Tech Stack
 
-**OpenVoice:** For voice cloning and flexible voice style control (emotion, accents, and tone).
+- **OpenVoice**: Voice cloning and synthesis
+- **Whisper**: Speech-to-text transcription
+- **Ollama**: Local LLM hosting (using llama3.2)
+- **PyAudio**: Audio handling
+- **WebRtcVadRecorder**: Voice activity detection
+- **Python 3.10+**: Core programming language
 
-**Whisper:** For high-accuracy speech-to-text transcription.
+## Project Structure
 
-**Ollama:** A platform for hosting and running large language models (LLMs) such as llama3.2 locally on your machine.
-
-**sounddevice, pyaudio, and speechrecognition:** Essential for audio recording and playback.
-
-
-
-
-## Architecture 
-- **User Console:** The system begins by recording the user's speech through the user interface or console.
-
-- **Whisper STT:** This component transcribes the recorded speech into text using high-accuracy speech-to-text technology.
-
-- **Conversational Chain:** The transcribed text is processed by a conversational chain powered by Ollama, which uses llama3.2 or any other large language model (LLM), to generate a meaningful response.
-
-- **MyShell OpenVoice:** The generated response is converted into speech using open-source voice cloning technology, providing flexibility in voice style (emotion, accents, tone).
-
-![FRIDAY](https://github.com/user-attachments/assets/5fe601f7-3335-449b-9b59-ea961449fbe7)
-
-
+```plaintext
+FRIDAY/
+├── talk.py              # Main controller
+├── audio_handler.py     # Audio playback management
+├── chat_handler.py      # LLM interaction & response
+├── memory.py            # Conversation memory
+├── record.py            # Voice recording & transcription
+├── tts_handler.py       # Text-to-speech processing
+└── Personality.txt      # Assistant personality config
+```
 
 ## Prerequisites
- - Make sure to set up a *virtual Python environment*. You have several options for this, including pyenv, virtualenv and others that serve a similar purpose.
 
- - Set up [OpenVoice](https://github.com/myshell-ai/OpenVoice) from their masterful repo.
+1. **Python Environment**
+   - Create a virtual environment (pyenv/virtualenv)
+   - Python 3.10+ recommended
 
- - Install *requirements.txt* on your environemnt.
+2. **OpenVoice Setup**
+   - Follow [OpenVoice installation](https://github.com/myshell-ai/OpenVoice)
+   - Download required checkpoints
 
- - Test different LLMs with varying parameter sizes to determine which provides the best token-per-second output on your device. Currently, I'm using **Ollama's llama3.2** model for comparison. 
+3. **Ollama Setup**
+   - Install [Ollama](https://ollama.ai/)
+   - Pull llama3.2 model: `ollama pull llama3.2`
+
+4. **Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Usage
+
+1. Activate your virtual environment
+2. Start Ollama server
+3. Run FRIDAY:
+   ```bash
+   python talk.py
+   ```
+4. Start speaking when prompted
+5. Press ESC to stop recording or interrupt responses
+
+## Voice Commands
+
+- Speak naturally to interact
+- Use "exit" to end conversation
+- Press ESC to stop current interaction
+- Speak during response to interrupt
+
+## Memory System
+
+FRIDAY remembers conversations when:
+- Explicitly asked to remember
+- Important information is shared
+- Context needs to be maintained
+
+## Contributing
+
+Feel free to contribute to FRIDAY's development:
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
