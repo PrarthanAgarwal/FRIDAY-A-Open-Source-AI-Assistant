@@ -1,0 +1,38 @@
+# Core ML/Audio Dependencies
+torch>=1.13.1
+torchaudio>=0.13.1
+numpy==1.26.4
+soundfile>=0.12.1
+librosa>=0.9.1
+pyaudio>=0.2.14
+scipy==1.11.4   
+numba==0.59.0
+whisper>=1.1.10
+openai-whisper==20231117  
+whisper-timestamped>=1.14.2
+faster-whisper>=0.9.0
+pydub>=0.25.1
+
+# Voice Activity Detection
+rhasspy-silence>=0.4.0
+webrtcvad==2.0.10  # Note: conda install -c conda-forge webrtcvad
+
+# Utility Packages
+keyboard>=0.13.5
+requests>=2.31.0
+pytz>=2024.1  
+langid>=1.1.6
+gradio>=3.48.0
+python-dotenv>=1.0.1
+
+# OpenVoice Text Processing
+unidecode>=1.3.7
+inflect>=7.0.0
+eng-to-ipa>=0.0.2
+pypinyin>=0.50.0
+jieba>=0.42.1
+cn2an>=0.5.22
+wavmark>=0.0.2  
+
+# Note: CUDA Support (install separately via conda)
+# conda install pytorch==1.13.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
