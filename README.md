@@ -103,7 +103,7 @@ voice:
   language: "en"
   
 llm:
-  model: "llama2-7b-chat"
+  model: "llama3.2-3b"
   quantization: "q4_K_M"
   
 system:
@@ -111,13 +111,31 @@ system:
   cache_enabled: true
 ```
 
+## 🤝 Required Model Files
+
+The following model files need to be downloaded and placed in the `models/` directory:
+
+```
+models/
+├── faster-whisper-base/
+│   ├── config.json
+│   ├── model.bin
+│   ├── tokenizer.json
+│   └── vocabulary.txt
+└── llama/
+    └── llama-3.2-3B-instruct-uncensored.gguf
+```
+
+### Model Downloads
+- **Faster Whisper**: Download the base model from [HuggingFace](https://huggingface.co/guillaumekln/faster-whisper-base)
+- **Llama**: Download the quantized model from [HuggingFace](https://huggingface.co/TheBloke/Llama-2-3B-GGUF)
+
+> Note: Due to size limitations, model files are not included in this repository. Please download them separately using the links above.
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
 
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
