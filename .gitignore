@@ -4,11 +4,19 @@ checkpoints/
 processed/
 tempaudio/
 outputs/
+Misc/
+Old/
+friday.egg-info/
+models/
 
 # Files
 FRIDAY.png
-chatbot_conversation_log.txt
-conversation_memory.json
+environment.txt
+requirements_frozen.txt
+requirements_mark2.txt
+Inference_LJSpeech.ipynb
+MARK II.md
+pytest.ini
 
 # Audio files
 *.wav

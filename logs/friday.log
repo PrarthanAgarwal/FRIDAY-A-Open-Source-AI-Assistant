@@ -1,0 +1,139 @@
+2024-11-23 20:26:59.497 | INFO     | src.voice.stt:__init__:18 - Initializing Whisper model on cuda with compute type float16
+2024-11-23 20:26:59.927 | INFO     | src.voice.stt:__init__:31 - Whisper model initialized successfully
+2024-11-23 20:26:59.927 | INFO     | src.voice.stt:__init__:55 - Voice processor initialized
+2024-11-23 20:26:59.966 | INFO     | src.core.llm:__init__:19 - CUDA available: NVIDIA GeForce GTX 1650
+2024-11-23 20:26:59.966 | INFO     | src.core.llm:__init__:20 - CUDA memory: 4.00 GB
+2024-11-23 20:27:00.045 | INFO     | src.core.llm:__init__:24 - Initializing LLaMA with exact model specifications
+2024-11-23 20:27:01.558 | INFO     | src.core.llm:__init__:46 - Model initialized, testing...
+2024-11-23 20:27:01.675 | INFO     | src.core.llm:__init__:48 - Model test successful
+2024-11-23 20:27:07.237 | INFO     | src.core.conversation:start_conversation:18 - Starting conversation...
+2024-11-23 20:27:07.237 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:27:17.692 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:27:18.942 | INFO     | src.core.conversation:start_conversation:29 - User:  Hello Friday, hello Friday.
+2024-11-23 20:27:36.698 | DEBUG    | src.core.llm:create_completion:79 - Raw LLM response: {'id': 'cmpl-d72c6bbd-c75a-4de5-8049-93977590427c', 'object': 'text_completion', 'created': 1732373838, 'model': 'models\\llama\\Llama-3.2-3B-Instruct-uncensored-Q4_K_M.gguf', 'choices': [{'text': ' (chuckles) I just wanted to, like, kick off the weekend and, uh, just get in the mood with something. You know? I\'ll start with just one song, but I\'ll probably be back with more later. So, like, bear with me, \'kay? Alright, so the song I\'m going to go with for this Friday is... "Friday" by... (pauses, thinks) ...Reel Big Fish. Yeah, that\'s right! This is like, the ultimate song for, uh, getting pumped for the weekend, right? It\'s like, the most iconic song to, you know, get ready to, uh, party and all that. So, like, if you\'re not already in the mood, now you should be. (laughs) I mean, come on, it\'s "Friday"! It\'s like, the gateway song to, uh, a weekend of, you know, doing nothing, but, like, in a good way! (laughs) Alright, that\'s it for now. More songs to come, I promise! (laughs) See you all on the flip side, I guess! (laughs) Goodnight, everybody! The end."', 'index': 0, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 7, 'completion_tokens': 249, 'total_tokens': 256}}
+2024-11-23 20:27:36.698 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:28:48.503 | INFO     | src.voice.stt:__init__:18 - Initializing Whisper model on cuda with compute type float16
+2024-11-23 20:28:48.950 | INFO     | src.voice.stt:__init__:31 - Whisper model initialized successfully
+2024-11-23 20:28:48.950 | INFO     | src.voice.stt:__init__:55 - Voice processor initialized
+2024-11-23 20:28:48.988 | INFO     | src.core.llm:__init__:19 - CUDA available: NVIDIA GeForce GTX 1650
+2024-11-23 20:28:48.989 | INFO     | src.core.llm:__init__:20 - CUDA memory: 4.00 GB
+2024-11-23 20:28:49.064 | INFO     | src.core.llm:__init__:24 - Initializing LLaMA with exact model specifications
+2024-11-23 20:28:50.570 | INFO     | src.core.llm:__init__:46 - Model initialized, testing...
+2024-11-23 20:28:50.678 | INFO     | src.core.llm:__init__:48 - Model test successful
+2024-11-23 20:28:56.209 | INFO     | src.core.conversation:start_conversation:18 - Starting conversation...
+2024-11-23 20:28:56.209 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:28:58.427 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:28:59.603 | INFO     | src.core.conversation:start_conversation:29 - User:  Hello Friday
+2024-11-23 20:29:20.279 | DEBUG    | src.core.llm:create_completion:79 - Raw LLM response: {'id': 'cmpl-3b1ec982-21a2-4aa7-955c-7cfb78e9fd88', 'object': 'text_completion', 'created': 1732373939, 'model': 'models\\llama\\Llama-3.2-3B-Instruct-uncensored-Q4_K_M.gguf', 'choices': [{'text': ' to everyone! I hope you all had an amazing week and are ready to kick off the weekend in style!\n\nBefore we dive into the weekend, I just wanted to take a quick moment to acknowledge the incredible work being done by so many amazing individuals and organizations in the community. Whether you\'re volunteering, donating, or simply spreading love and positivity, it\'s making a difference and I am so grateful.\n\nNow, let\'s get into the fun stuff! What\'s on your agenda for the weekend? Got a fun plan or just a relaxing vibe? Let me know in the comments below!\n\nAs for me, I\'m planning on taking a well-deserved break and recharging my batteries. Maybe a weekend of self-care, reading, and catching up with loved ones. You know what they say, "you can\'t pour from an empty cup"... and I\'m ready to refill!\n\nThat\'s it for this week, folks! Before I go, let\'s take a moment to appreciate the little things in life and the people who make it all worthwhile. Sending you all love, light, and a big ol\' virtual hug!\n\nXOXO,\n[Your Name]"\n\nThis is a sample Friday post that you can customize to fit your tone and style. Remember to keep it light and fun, and to include a clear call-to-action (like asking your followers to share what they have planned for the weekend). Good luck with your weekend!', 'index': 0, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 3, 'completion_tokens': 288, 'total_tokens': 291}}
+2024-11-23 20:29:20.845 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:32:25.469 | INFO     | src.voice.stt:__init__:18 - Initializing Whisper model on cuda with compute type float16
+2024-11-23 20:32:25.908 | INFO     | src.voice.stt:__init__:31 - Whisper model initialized successfully
+2024-11-23 20:32:25.908 | INFO     | src.voice.stt:__init__:55 - Voice processor initialized
+2024-11-23 20:32:25.946 | INFO     | src.core.llm:__init__:20 - CUDA available: NVIDIA GeForce GTX 1650
+2024-11-23 20:32:25.946 | INFO     | src.core.llm:__init__:21 - CUDA memory: 4.00 GB
+2024-11-23 20:32:26.027 | INFO     | src.core.llm:__init__:25 - Initializing LLaMA with exact model specifications
+2024-11-23 20:32:27.739 | INFO     | src.core.llm:__init__:47 - Model initialized, testing...
+2024-11-23 20:32:27.857 | INFO     | src.core.llm:__init__:49 - Model test successful
+2024-11-23 20:32:33.415 | INFO     | src.core.conversation:start_conversation:18 - Starting conversation...
+2024-11-23 20:32:33.415 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:32:35.616 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:32:36.826 | INFO     | src.core.conversation:start_conversation:29 - User:  You
+2024-11-23 20:32:41.504 | DEBUG    | src.core.llm:create_completion:92 - Raw LLM response: {'id': 'cmpl-13756f42-ebeb-4c36-9edf-81b34f0363ec', 'object': 'text_completion', 'created': 1732374156, 'model': 'models\\llama\\Llama-3.2-3B-Instruct-uncensored-Q4_K_M.gguf', 'choices': [{'text': '  Friday\n\n', 'index': 0, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 91, 'completion_tokens': 5, 'total_tokens': 96}}
+2024-11-23 20:32:41.661 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:32:45.431 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:32:46.255 | INFO     | src.core.conversation:start_conversation:29 - User:  Hello Friday.
+2024-11-23 20:32:48.589 | DEBUG    | src.core.llm:create_completion:92 - Raw LLM response: {'id': 'cmpl-7f043ec1-4291-4dfd-a444-a4f1f0aa72ab', 'object': 'text_completion', 'created': 1732374166, 'model': 'models\\llama\\Llama-3.2-3B-Instruct-uncensored-Q4_K_M.gguf', 'choices': [{'text': "  Good morning, Sir. I trust you're well? \n(I've got a lot of work to do today and need some focus)\n\n", 'index': 0, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 92, 'completion_tokens': 30, 'total_tokens': 122}}
+2024-11-23 20:32:48.721 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:39:35.612 | INFO     | src.voice.stt:__init__:18 - Initializing Whisper model on cuda with compute type float16
+2024-11-23 20:39:36.054 | INFO     | src.voice.stt:__init__:31 - Whisper model initialized successfully
+2024-11-23 20:39:36.054 | INFO     | src.voice.stt:__init__:55 - Voice processor initialized
+2024-11-23 20:39:36.091 | INFO     | src.core.llm:__init__:20 - CUDA available: NVIDIA GeForce GTX 1650
+2024-11-23 20:39:36.091 | INFO     | src.core.llm:__init__:21 - CUDA memory: 4.00 GB
+2024-11-23 20:39:36.165 | INFO     | src.core.llm:__init__:25 - Initializing LLaMA with exact model specifications
+2024-11-23 20:39:37.703 | INFO     | src.core.llm:__init__:47 - Model initialized, testing...
+2024-11-23 20:39:37.812 | INFO     | src.core.llm:__init__:49 - Model test successful
+2024-11-23 20:39:43.791 | INFO     | src.core.conversation:start_conversation:18 - Starting conversation...
+2024-11-23 20:39:43.792 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:39:46.042 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:39:47.192 | INFO     | src.core.conversation:start_conversation:29 - User:  Hello Friday
+2024-11-23 20:39:52.990 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:42:22.812 | INFO     | src.voice.stt:__init__:18 - Initializing Whisper model on cuda with compute type float16
+2024-11-23 20:42:23.277 | INFO     | src.voice.stt:__init__:31 - Whisper model initialized successfully
+2024-11-23 20:42:23.277 | INFO     | src.voice.stt:__init__:55 - Voice processor initialized
+2024-11-23 20:42:23.300 | INFO     | src.core.llm:__init__:20 - CUDA available: NVIDIA GeForce GTX 1650
+2024-11-23 20:42:23.300 | INFO     | src.core.llm:__init__:21 - CUDA memory: 4.00 GB
+2024-11-23 20:42:23.373 | INFO     | src.core.llm:__init__:25 - Initializing LLaMA with exact model specifications
+2024-11-23 20:42:24.877 | INFO     | src.core.llm:__init__:47 - Model initialized, testing...
+2024-11-23 20:42:25.004 | INFO     | src.core.llm:__init__:49 - Model test successful
+2024-11-23 20:43:06.779 | INFO     | src.voice.stt:__init__:18 - Initializing Whisper model on cuda with compute type float16
+2024-11-23 20:43:07.656 | INFO     | src.voice.stt:__init__:31 - Whisper model initialized successfully
+2024-11-23 20:43:07.656 | INFO     | src.voice.stt:__init__:55 - Voice processor initialized
+2024-11-23 20:43:07.683 | INFO     | src.core.llm:__init__:20 - CUDA available: NVIDIA GeForce GTX 1650
+2024-11-23 20:43:07.683 | INFO     | src.core.llm:__init__:21 - CUDA memory: 4.00 GB
+2024-11-23 20:43:07.767 | INFO     | src.core.llm:__init__:25 - Initializing LLaMA with exact model specifications
+2024-11-23 20:43:09.327 | INFO     | src.core.llm:__init__:47 - Model initialized, testing...
+2024-11-23 20:43:09.454 | INFO     | src.core.llm:__init__:49 - Model test successful
+2024-11-23 20:43:15.017 | INFO     | src.core.conversation:start_conversation:18 - Starting conversation...
+2024-11-23 20:43:15.017 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:43:17.289 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:43:20.817 | INFO     | src.core.conversation:start_conversation:29 - User:  வணக்கம்
+2024-11-23 20:43:27.349 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:43:31.449 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:43:33.019 | INFO     | src.core.conversation:start_conversation:29 - User:  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+2024-11-23 20:43:37.373 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:43:41.402 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:43:42.427 | INFO     | src.core.conversation:start_conversation:29 - User:  Hello Friday.
+2024-11-23 20:43:43.760 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:43:54.547 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:44:02.690 | INFO     | src.core.conversation:start_conversation:29 - User:  2x3  2x3
+2024-11-23 20:44:06.146 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:47:05.943 | INFO     | src.voice.stt:__init__:18 - Initializing Whisper model on cuda with compute type float16
+2024-11-23 20:47:06.394 | INFO     | src.voice.stt:__init__:31 - Whisper model initialized successfully
+2024-11-23 20:47:06.394 | INFO     | src.voice.stt:__init__:55 - Voice processor initialized
+2024-11-23 20:47:06.432 | INFO     | src.core.llm:__init__:20 - CUDA available: NVIDIA GeForce GTX 1650
+2024-11-23 20:47:06.432 | INFO     | src.core.llm:__init__:21 - CUDA memory: 4.00 GB
+2024-11-23 20:47:06.511 | INFO     | src.core.llm:__init__:25 - Initializing LLaMA with exact model specifications
+2024-11-23 20:47:08.014 | INFO     | src.core.llm:__init__:47 - Model initialized, testing...
+2024-11-23 20:47:08.124 | INFO     | src.core.llm:__init__:49 - Model test successful
+2024-11-23 20:47:14.640 | INFO     | src.core.conversation:start_conversation:18 - Starting conversation...
+2024-11-23 20:47:14.655 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:47:16.961 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:47:18.190 | INFO     | src.core.conversation:start_conversation:29 - User:  Hello Friday
+2024-11-23 20:47:30.944 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:47:36.699 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:47:40.063 | INFO     | src.core.conversation:start_conversation:29 - User:  구독과 좋아요 부탁드립니다.
+2024-11-23 20:48:51.343 | INFO     | src.voice.stt:__init__:18 - Initializing Whisper model on cuda with compute type float16
+2024-11-23 20:48:52.219 | INFO     | src.voice.stt:__init__:31 - Whisper model initialized successfully
+2024-11-23 20:48:52.219 | INFO     | src.voice.stt:__init__:55 - Voice processor initialized
+2024-11-23 20:48:52.256 | INFO     | src.core.llm:__init__:20 - CUDA available: NVIDIA GeForce GTX 1650
+2024-11-23 20:48:52.257 | INFO     | src.core.llm:__init__:21 - CUDA memory: 4.00 GB
+2024-11-23 20:48:52.334 | INFO     | src.core.llm:__init__:25 - Initializing LLaMA with exact model specifications
+2024-11-23 20:48:53.860 | INFO     | src.core.llm:__init__:47 - Model initialized, testing...
+2024-11-23 20:48:53.998 | INFO     | src.core.llm:__init__:49 - Model test successful
+2024-11-23 20:49:00.602 | INFO     | src.core.conversation:start_conversation:18 - Starting conversation...
+2024-11-23 20:49:00.602 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:49:02.630 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:49:05.075 | INFO     | src.core.conversation:start_conversation:29 - User:  Hello Friday
+2024-11-23 20:49:17.932 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:49:21.822 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:49:22.732 | INFO     | src.core.conversation:start_conversation:29 - User:  You
+2024-11-23 20:49:24.542 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:49:28.566 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:49:37.734 | INFO     | src.core.conversation:start_conversation:29 - User:  यह रहुहे गीइा का जाशंलाखाने जिन्तु?
+2024-11-23 20:49:41.856 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:49:46.825 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:49:47.774 | INFO     | src.core.conversation:start_conversation:29 - User:  What did you understand just now?
+2024-11-23 20:49:58.175 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:54:01.312 | INFO     | src.voice.stt:__init__:18 - Initializing Whisper model on cuda with compute type float16
+2024-11-23 20:54:02.219 | INFO     | src.voice.stt:__init__:31 - Whisper model initialized successfully
+2024-11-23 20:54:02.219 | INFO     | src.voice.stt:__init__:55 - Voice processor initialized
+2024-11-23 20:54:02.242 | INFO     | src.core.llm:__init__:20 - CUDA available: NVIDIA GeForce GTX 1650
+2024-11-23 20:54:02.242 | INFO     | src.core.llm:__init__:21 - CUDA memory: 4.00 GB
+2024-11-23 20:54:02.338 | INFO     | src.core.llm:__init__:25 - Initializing LLaMA with exact model specifications
+2024-11-23 20:54:03.885 | INFO     | src.core.llm:__init__:47 - Model initialized, testing...
+2024-11-23 20:54:03.992 | INFO     | src.core.llm:__init__:49 - Model test successful
+2024-11-23 20:54:10.853 | INFO     | src.core.conversation:start_conversation:18 - Starting conversation...
+2024-11-23 20:54:10.853 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)
+2024-11-23 20:54:13.094 | INFO     | src.voice.recorder:record:59 - Voice command complete
+2024-11-23 20:54:15.441 | INFO     | src.core.conversation:start_conversation:29 - User:  Hello Friday.
+2024-11-23 20:54:28.166 | INFO     | src.core.conversation:start_conversation:22 - Listening... (Press ESC to stop)

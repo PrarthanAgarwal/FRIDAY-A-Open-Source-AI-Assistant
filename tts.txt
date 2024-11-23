@@ -1,0 +1,26 @@
+The RTF value tells you how fast the generation is:
+RTF < 1: Faster than real-time
+RTF = 1: Real-time
+RTF > 1: Slower than real-time
+
+Let's break down each parameter's effect:
+
+diffusion_steps (both functions)
+- Range: 5-20
+- Effect: Higher values give cleaner, more natural speech
+- Trade-off: More steps = slower generation
+- Recommended: 5 for quick tests, 10-15 for production
+
+embedding_scale (both functions)
+- Range: 0.5-2.0
+- Effect: Controls speech expressiveness
+- Lower values (0.5-0.8): More monotone, flat speech
+- Normal values (0.8-1.2): Natural speech
+- Higher values (1.2-2.0): More dramatic, emphasized speech
+
+alpha (LFinference only)
+- Range: 0-1
+- Effect: Controls style consistency between sentences
+- Lower values (0.3-0.5): More variation between sentences
+- Higher values (0.7-0.9): More consistent style across sentences
+- 0.7 is typically a good balance

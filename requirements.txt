@@ -1,0 +1,48 @@
+# Core ML Dependencies
+torch==2.5.1
+torchaudio==2.5.1
+numpy==1.26.4
+cuda-python==12.6.2.post1
+tensorboard==2.18.0
+
+# StyleTTS2 Specific
+phonemizer==3.0.1
+pypinyin==0.53.0
+scipy==1.14.1
+einops==0.7.0
+transformers==4.40.2
+pytorch-lightning==2.4.0
+matplotlib==3.9.2
+praat-parselmouth==0.4.5
+pyworld==0.3.4
+tqdm==4.67.0
+
+# Audio & Input Dependencies
+PyAudio==0.2.14
+keyboard==0.13.5
+rhasspy-silence==0.4.0
+
+# Speech Recognition
+faster-whisper==1.0.3
+llama-cpp-python==0.3.0
+
+# Audio Processing
+sounddevice==0.5.1
+librosa==0.10.2.post1
+webrtcvad-wheels==2.0.14
+soundfile==0.12.1
+
+# API & Performance
+fastapi==0.115.5
+uvicorn[standard]==0.32.0
+redis==5.2.0
+pydantic==2.9.2
+
+# Utilities
+python-dotenv==1.0.1
+loguru==0.7.2
+
+# Testing Dependencies
+pytest==8.0.0
+pytest-asyncio==0.23.5
+pytest-cov==4.1.0
