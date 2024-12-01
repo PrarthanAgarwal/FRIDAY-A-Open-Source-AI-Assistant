@@ -20,9 +20,25 @@ FRIDAY (MARK II) is a powerful, open-source AI assistant designed for real-time 
   
 - **Intelligent Processing**
   - Local LLM processing via llama.cpp
-  - Context-aware memory system
+  - Advanced memory systems:
+    - Context-aware short-term memory
+    - Long-term conversation storage
+    - Automatic importance detection
+    - Tag-based memory retrieval
   - Natural language command parsing
   
+- **Memory System**
+  - Contextual conversation tracking
+  - Automatic importance detection
+  - Personal preference learning
+  - Tag-based memory organization:
+    - Personal facts
+    - Preferences
+    - Temporal information
+    - Tasks and reminders
+  - Conversation timeout management
+  - Memory persistence across sessions
+
 - **System Integration**
   - Device control capabilities
   - Sensor data processing
@@ -109,6 +125,16 @@ llm:
 system:
   parallel_processing: true
   cache_enabled: true
+  memory:
+    context_size: 10
+    conversation_timeout: 300
+    persistence: true
+    tags:
+      - personal
+      - preference
+      - temporal
+      - task
+      - fact
 ```
 
 ## 🤝 Required Model Files

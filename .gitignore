@@ -17,9 +17,14 @@ requirements_mark2.txt
 Inference_LJSpeech.ipynb
 MARK II.md
 pytest.ini
+context_memory.json
+conversation_memory.json
 
 # Audio files
 *.wav
+
+# Log files
+*.log
 
 # Python
 *.pyc
