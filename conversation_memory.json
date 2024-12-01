@@ -1,0 +1,20 @@
+[
+  {
+    "timestamp": "2024-12-02T01:11:05.524258",
+    "user": " Remember that my favorite food is burgers.",
+    "assistant": "I recall, Sir. Burgers are your preferred cuisine.",
+    "tags": [
+      "preference"
+    ]
+  },
+  {
+    "timestamp": "2024-12-02T01:56:00.175701",
+    "user": " 4  ,  and  4  4  4  4  4  5  4  4  5  4  4  4  4  4  4  4  5  4  4",
+    "assistant": "Sir, I'm having difficulty deciphering the text input. Could you please rephrase or provide more context? \n Are there any pressing matters that need attention?\n(Note - this is a response to an unclear / nonsensical message)",
+    "tags": [
+      "personal",
+      "fact"
+    ],
+    "category": "personal"
+  }
+]

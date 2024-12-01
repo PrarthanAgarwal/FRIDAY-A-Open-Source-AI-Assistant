@@ -1,0 +1,18 @@
+2024-11-30 22:21:47.704 | INFO | stt:__init__:18 - Initializing Whisper model on cuda with compute type float16
+2024-11-30 22:21:48.024 | INFO | stt:__init__:31 - Whisper model initialized successfully
+2024-11-30 22:21:48.024 | INFO | stt:__init__:55 - Voice processor initialized
+2024-11-30 22:21:48.049 | INFO | llm:__init__:22 - CUDA available: NVIDIA GeForce GTX 1650
+2024-11-30 22:21:48.049 | INFO | llm:__init__:23 - CUDA memory: 4.00 GB
+2024-11-30 22:21:48.123 | INFO | llm:__init__:27 - Initializing LLaMA with exact model specifications
+2024-11-30 22:21:49.401 | INFO | llm:__init__:51 - Model initialized, testing...
+2024-11-30 22:21:49.518 | INFO | llm:__init__:55 - Model test successful
+2024-11-30 22:21:55.941 | INFO | conversation:start_conversation:19 - Starting FRIDAY...
+
+2024-11-30 22:21:55.942 | INFO | conversation:start_conversation:24 - 🎤 Listening... (Press ESC to stop)
+2024-11-30 22:22:00.608 | INFO | recorder:record:59 - Voice command complete
+2024-11-30 22:22:01.901 | INFO | conversation:start_conversation:34 -  Hello Friday.
+2024-11-30 22:22:07.857 | INFO | conversation:start_conversation:40 - Good morning, Sir. How can I assist you today?
+2024-11-30 22:22:14.683 | INFO | conversation:start_conversation:24 - 🎤 Listening... (Press ESC to stop)
+2024-11-30 22:22:15.818 | INFO | recorder:record:51 - Recording interrupted by user
+2024-11-30 22:22:15.845 | INFO | conversation:start_conversation:29 - 
+Goodbye!

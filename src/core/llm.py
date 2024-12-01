@@ -8,6 +8,8 @@ from loguru import logger
 from pathlib import Path
 import sys
 import contextlib
+from .context_memory import ContextMemory
+from .memory import ConversationMemory
 
 logger = get_logger()
 
@@ -59,6 +61,9 @@ class LLMHandler:
             with open(personality_path, 'r') as f:
                 self.personality = f.read().strip()
             
+            self.context_memory = ContextMemory(max_context=10)
+            self.conversation_memory = ConversationMemory()
+            
         except Exception as e:
             import traceback
             detailed_error = f"Failed to initialize LLaMA: {str(e)}\n"
@@ -92,33 +97,59 @@ class LLMHandler:
         Create a completion for the given prompt using LLaMA
         """
         try:
-            if not hasattr(self, 'personality'):
-                personality_path = Path("Personality.txt")
-                with open(personality_path, 'r') as f:
-                    self.personality = f.read().strip()
+            # Get context history
+            context = self.context_memory.get_context()
+            
+            # Check if prompt contains important markers
+            is_important = False
+            for category, triggers in self.conversation_memory.memory_triggers.items():
+                if any(trigger in prompt.lower() for trigger in triggers):
+                    is_important = True
+                    break
+            
+            # Format prompt with context
+            context_str = "\n".join([
+                f"{msg['role']}: {msg['content']}"
+                for msg in context
+            ])
             
             formatted_prompt = (
                 f"{self.personality}\n\n"
+                f"Previous context:\n{context_str}\n\n"
                 f"Human: {prompt}\n"
                 "Assistant:"
             )
             
-            # Suppress debug output during completion
-            with self._suppress_output():
-                response = self.model.create_completion(
-                    formatted_prompt,
-                    max_tokens=150,
-                    temperature=0.7,
-                    top_p=0.9,
-                    stop=["Human:", "Assistant:", "\n\n"],
-                    stream=False,
-                    repeat_penalty=1.5
-                )
+            # Generate response
+            response = self.model.create_completion(
+                formatted_prompt,
+                max_tokens=50,  # Reduced for faster responses
+                temperature=0.7,
+                top_p=0.9,
+                stop=["Human:", "Assistant:", "\n\n"],
+                stream=False,
+                repeat_penalty=1.2  # Reduced for more natural responses
+            )
             
-            if isinstance(response, dict) and 'choices' in response:
-                return response['choices'][0]['text'].strip()
+            # Extract and clean response text
+            if isinstance(response, dict):
+                response_text = response['choices'][0]['text'].strip()
+            else:
+                response_text = str(response).strip()
             
-            return str(response).strip()
+            # Clean response - remove any metadata or extra content
+            response_text = response_text.split('\n')[0]  # Take only first line
+            response_text = response_text.replace('assistant:', '').replace('human:', '').strip()
+            
+            # Always add to context memory for conversation flow
+            self.context_memory.add_message("human", prompt, important=is_important)
+            self.context_memory.add_message("assistant", response_text, important=is_important)
+            
+            # Only save to conversation memory if it's important
+            if is_important:
+                await self.conversation_memory.save(prompt, response_text)
+            
+            return response_text
             
         except Exception as e:
             logger.error(f"Error generating response: {e}")

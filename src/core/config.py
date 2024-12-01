@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Dict, Optional, Any, Union
+from typing import Dict, Optional, Any, Union, List
 import os
 from dataclasses import dataclass, field
 import torch
@@ -71,11 +71,28 @@ class ServerConfig:
         self.port = 8000       # Default port
 
 @dataclass
+class MemoryConfig:
+    max_context: int = 10
+    memory_file: str = "conversation_memory.json"
+    context_file: str = "context_memory.json"
+    important_triggers: List[str] = field(default_factory=lambda: [
+        "remember",
+        "don't forget",
+        "make a note",
+        "save this",
+        "store this",
+        "memorize",
+        "keep this in mind",
+        "important"
+    ])
+
+@dataclass
 class FridayConfig:
     models: ModelPaths = field(default_factory=ModelPaths)
     system: SystemConfig = field(default_factory=SystemConfig)
     api: APIConfig = field(default_factory=APIConfig)
     server: ServerConfig = field(default_factory=ServerConfig)
+    memory: MemoryConfig = field(default_factory=MemoryConfig)
 
     def __post_init__(self):
         """Verify models exist and paths are valid"""

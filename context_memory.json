@@ -1,0 +1,50 @@
+[
+  {
+    "role": "human",
+    "content": " nd",
+    "timestamp": "2024-12-02T02:10:47.040866",
+    "important": false
+  },
+  {
+    "role": "assistant",
+    "content": "FRIDAY",
+    "timestamp": "2024-12-02T02:10:47.041866",
+    "important": false
+  },
+  {
+    "role": "human",
+    "content": " What was that?",
+    "timestamp": "2024-12-02T02:10:57.471943",
+    "important": false
+  },
+  {
+    "role": "assistant",
+    "content": "Sorry, Boss. It seems I didn't catch what you were saying. Could you please rephrase or provide more context?",
+    "timestamp": "2024-12-02T02:10:57.471943",
+    "important": false
+  },
+  {
+    "role": "human",
+    "content": " Yeah, that was my bad sorry",
+    "timestamp": "2024-12-02T02:11:14.706409",
+    "important": false
+  },
+  {
+    "role": "assistant",
+    "content": "No worries, Boss. Let's get started fresh then. What can I assist you with today?",
+    "timestamp": "2024-12-02T02:11:14.707410",
+    "important": false
+  },
+  {
+    "role": "human",
+    "content": " That will be all for today.",
+    "timestamp": "2024-12-02T02:11:31.514834",
+    "important": false
+  },
+  {
+    "role": "assistant",
+    "content": "Affirmative, Boss. Safe evening. FRIDAY out. (ends session)",
+    "timestamp": "2024-12-02T02:11:31.515835",
+    "important": false
+  }
+]
