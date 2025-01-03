@@ -13,37 +13,49 @@ FRIDAY (MARK II) is a powerful, open-source AI assistant designed for real-time 
 
 ## 🚀 Core Features
 
-- **Advanced Voice Interface**
-  - Real-time voice synthesis using StyleTTS2
-  - Fast transcription with faster-whisper
-  - Voice interrupt capability during responses
-  
-- **Intelligent Processing**
-  - Local LLM processing via llama.cpp
-  - Advanced memory systems:
-    - Context-aware short-term memory
-    - Long-term conversation storage
-    - Automatic importance detection
-    - Tag-based memory retrieval
-  - Natural language command parsing
-  
-- **Memory System**
-  - Contextual conversation tracking
-  - Automatic importance detection
-  - Personal preference learning
-  - Tag-based memory organization:
-    - Personal facts
-    - Preferences
-    - Temporal information
-    - Tasks and reminders
-  - Conversation timeout management
-  - Memory persistence across sessions
+<details>
+<summary><b>Advanced Voice Interface</b></summary>
 
-- **System Integration**
-  - Device control capabilities
-  - Sensor data processing
-  - Task automation
-  - External service integration
+- Real-time voice synthesis using StyleTTS2
+- Fast transcription with faster-whisper
+- Voice interrupt capability during responses
+</details>
+
+<details>
+<summary><b>Intelligent Processing</b></summary>
+
+- Local LLM processing via llama.cpp
+- Advanced memory systems:
+  - Context-aware short-term memory
+  - Long-term conversation storage
+  - Automatic importance detection
+  - Tag-based memory retrieval
+- Natural language command parsing
+</details>
+
+<details>
+<summary><b>Memory System</b></summary>
+
+- Contextual conversation tracking
+- Automatic importance detection
+- Personal preference learning
+- Tag-based memory organization:
+  - Personal facts
+  - Preferences
+  - Temporal information
+  - Tasks and reminders
+- Conversation timeout management
+- Memory persistence across sessions
+</details>
+
+<details>
+<summary><b>System Integration</b></summary>
+
+- Device control capabilities
+- Sensor data processing
+- Task automation
+- External service integration
+</details>
 
 ## 🏗️ Architecture
 
@@ -158,11 +170,6 @@ models/
 
 > Note: Due to size limitations, model files are not included in this repository. Please download them separately using the links above.
 
-## 🤝 Contributing
-
-Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
-
-
 ## 🙏 Acknowledgments
 
 Special thanks to the open-source community and the creators of:
@@ -174,4 +181,4 @@ Special thanks to the open-source community and the creators of:
 
 ---
 
-<p align="center">Made with ❤️ for the AI Assistant community</p>
+<p align="center">Made with a dream of matching Tony Stark </p>
